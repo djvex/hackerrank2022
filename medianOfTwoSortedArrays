@@ -1,0 +1,73 @@
+/**
+ * 
+ * Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays. 
+ * The overall run time complexity should be O(log (m+n)).
+ * Example 1:
+
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000
+Explanation: merged array = [1,2,3] and median is 2.
+Example 2:
+
+Input: nums1 = [1,2], nums2 = [3,4]
+Output: 2.50000
+Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+ 
+
+Constraints:
+
+nums1.length == m
+nums2.length == n
+0 <= m <= 1000
+0 <= n <= 1000
+1 <= m + n <= 2000
+-106 <= nums1[i], nums2[i] <= 106
+
+ */
+
+function findMedianSortedArrays(arr1, arr2) {
+    var concat = arr1.concat(arr2);
+    concat = concat.sort(function (a,b){ return a-b}); // wtf is a-b?
+    console.log(concat);
+    var length = concat.length;
+
+    if (length % 2 == 1) {
+        // length is odd
+        return concat[(length / 2 ) -.5]; // i.e. if we have [1, 2, 3, 5, 7]. 5/2 = 2.5 - .5 = concat[2] == 3
+    } else {
+        return (concat[(length / 2 ) - 1] + concat[(length / 2 )]) / 2;
+    }
+}
+
+// SOLUTION without using .sort
+// var findMedianSortedArrays = function (nums1, nums2) {
+//     // Store the total length of the two arrays combined
+//     const totalLength = nums1.length + nums2.length;
+
+//     // Store the middle point (rounding down for even lengths)
+//     const halfWayPoint = Math.floor(totalLength / 2);
+
+//     // Counters to track progress through each array
+//     let nums1Pos = 0;
+//     let nums2Pos = 0;
+//     let lastNum, secondToLastNum;
+
+//     // Loop until we reach the half-way point
+//     for (let i = 0; i <= halfWayPoint; i++) {
+//         // Store the previous number
+//         secondToLastNum = lastNum;
+
+//         // If we've run out of numbers in array 2, or if the next number in array 1 comes before (is lower than) the next number in array 2
+//         if (
+//             nums2[nums2Pos] == undefined ||
+//             (nums1[nums1Pos] != undefined && nums1[nums1Pos] <= nums2[nums2Pos])
+//         ) {
+//             // Store the next number in array 1	and increment its counter
+//             lastNum = nums1[nums1Pos];
+//             nums1Pos++;
+//         } else {
+//             // Store the next number in array 2 and increment its counter
+//             lastNum = nums2[nums2Pos];
+//             nums2Pos++;
+//         }
+//     }
