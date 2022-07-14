@@ -18,7 +18,7 @@ LRUCache.prototype.get = function(key) {
     // if key doesn't exist, return -1
     if(!this.map[key]) return -1
 
-
+console.log("hello");
     // if key exists, return
     // move to front of linked List
     // return value
