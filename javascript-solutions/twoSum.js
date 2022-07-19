@@ -6,5 +6,6 @@ var twoSum = function (nums, target) {
                 }
         }
     }
+	console.log("poop");
     return [-1, -1];
 }
